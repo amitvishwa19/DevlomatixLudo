@@ -122,7 +122,7 @@ public class EditProfileController : MonoBehaviour
 
 
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     // Update is called once per frame

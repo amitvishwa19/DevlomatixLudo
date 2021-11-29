@@ -4,7 +4,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using UnityEngine.EventSystems;
 using System;
-
+using AssemblyCSharp;
 
 public class AdManager : MonoBehaviour
 {
@@ -42,7 +42,7 @@ public class AdManager : MonoBehaviour
 
     private void Start()
     {
-
+        
         if (isProductionApp)
         {
             bannerAdID = "ca-app-pub-3828162090040000/8858254020";
@@ -140,15 +140,16 @@ public class AdManager : MonoBehaviour
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
         Debug.Log("Reward base video Rewarded");
-        GameManager.Instance.playfabManager.addCoinsRequest(500);
+        GameManager.Instance.playfabManager.addCoinsRequest(StaticStrings.rewardForVideoAd);
         this.RequestRewardBaseVideoAd();
+        
     }
 
     public void HandleRewardBaseVideoClosed(object sender, EventArgs args)
     {
         Debug.Log("Reward base video closed");
         this.RequestRewardBaseVideoAd();
-
+        
 
     }
 

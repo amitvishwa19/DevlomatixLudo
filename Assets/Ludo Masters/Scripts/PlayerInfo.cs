@@ -1,17 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using AssemblyCSharp;
-using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
+using AssemblyCSharp;
 
-public class PlayerInfoController : MonoBehaviour
+public class PlayerInfo : MonoBehaviour
 {
-
     public GameObject window;
 
     public GameObject avatar;
     public GameObject playername;
+    public GameObject playerId;
 
     public Sprite avatarSprite;
 
@@ -29,11 +28,6 @@ public class PlayerInfoController : MonoBehaviour
     public GameObject addFriendButton;
     public GameObject editProfileButton;
     public GameObject EditButton;
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         if (!StaticStrings.isFourPlayerModeEnabled)
@@ -53,13 +47,13 @@ public class PlayerInfoController : MonoBehaviour
         if (index == 0)
         {
             FillData(GameManager.Instance.avatarMy, GameManager.Instance.nameMy, GameManager.Instance.myPlayerData);
-            addFriendButton.SetActive(false);
-            editProfileButton.SetActive(true);
+            //addFriendButton.SetActive(false);
+            //editProfileButton.SetActive(true);
         }
         else
         {
-            addFriendButton.SetActive(true);
-            editProfileButton.SetActive(false);
+            //addFriendButton.SetActive(true);
+            //editProfileButton.SetActive(false);
             Debug.Log("Player info " + index);
 
             FillData(GameManager.Instance.playerObjects[index].avatar, GameManager.Instance.playerObjects[index].name, GameManager.Instance.playerObjects[index].data);
@@ -90,14 +84,19 @@ public class PlayerInfoController : MonoBehaviour
             avatar.GetComponent<Image>().sprite = avatarSprite;
         }
 
+
+        Debug.Log(data);
+
+
         playername.GetComponent<Text>().text = name;
+        playerId.GetComponent<Text>().text = name;
         TotalEarningsValue.GetComponent<Text>().text = data.GetTotalEarnings().ToString();
         GamesPlayedValue.GetComponent<Text>().text = data.GetPlayedGamesCount().ToString();
         CurrentMoneyValue.GetComponent<Text>().text = data.GetCoins().ToString();
         GamesWonValue.GetComponent<Text>().text = (data.GetTwoPlayerWins() + data.GetFourPlayerWins()).ToString();
         float gamesWon = (data.GetTwoPlayerWins() + data.GetFourPlayerWins());
-        Debug.Log("WON: " + gamesWon);
-        Debug.Log("played: " + data.GetPlayedGamesCount());
+        //Debug.Log("WON: " + gamesWon);
+        //Debug.Log("played: " + data.GetPlayedGamesCount());
         if (data.GetPlayedGamesCount() != 0 && gamesWon != 0)
         {
             WinRateValue.GetComponent<Text>().text = Mathf.RoundToInt((gamesWon / data.GetPlayedGamesCount() * 100)).ToString() + "%";
