@@ -4,13 +4,13 @@ namespace AssemblyCSharp
     public static class StaticStrings
     {
 
-        public static string AndroidPackageName = "com.rabbie.ludotwist";
+        public static string AndroidPackageName = "com.devlomatix.ludoblast";
         public static string ITunesAppID = "11111111111";
 
 
 
         // Notifications
-        public static string notificationTitle = "Ludo Twist";
+        public static string notificationTitle = "Ludo Blast";
         public static string notificationMessage = "Get your FREE fortune spin!";
 
         // Game configuration
@@ -26,12 +26,12 @@ namespace AssemblyCSharp
         public static string adMobiOSID = "ca-app-pub-4150875028712336/253535234";
 
         // Facebook share variables
-        public static string facebookShareLinkTitle = "I'm playing Ludo Twist!. Available on Android and iOS.";
+        public static string facebookShareLinkTitle = "I'm playing Ludo Blast!. Available on Android and iOS.";
 
         // Share private room code
-        public static string SharePrivateLinkMessage = "Join me in Ludo Twist. My PRIVATE ROOM CODE is:";
-        public static string SharePrivateLinkMessage2 = "Download Ludo Twist from:";
-        public static string ShareScreenShotText = "I finished game in Ludo Twist. It's my score :-) Join me and download Ludo Twist:";
+        public static string SharePrivateLinkMessage = "Join me in Ludo Blast. My PRIVATE ROOM CODE is:";
+        public static string SharePrivateLinkMessage2 = "Download Ludo Blast from:";
+        public static string ShareScreenShotText = "I finished game in Ludo Blast. It's my score :-) Join me and download Ludo Blast:";
 
 
         // Initial coins count for new players

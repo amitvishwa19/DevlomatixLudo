@@ -11,21 +11,33 @@ public class AdManager : MonoBehaviour
     public static AdManager instance;
 
 
-    string appID = "ca-app-pub-3828162090040000~7507845037";
+    //string appID = "ca-app-pub-5558528618918107~1937403280";
 
     private BannerView bannerAd;
     private InterstitialAd interstitialAd;
     private RewardBasedVideoAd rewardBasedVideo;
     private RewardedAd rewardedAd;
 
+    private string testBannerAdID = "ca-app-pub-3940256099942544/6300978111";
+    private string testInterstitialAdID = "ca-app-pub-3940256099942544/1033173712";
+    private string testRewardedAdID = "ca-app-pub-3940256099942544/5224354917";
 
+    public bool UnityAds;
+    public bool AdMob;
+    public bool isProductionApp;
+
+    [Header("AdMob")]
+    public string AppID;
+    public string BannerAdID;
+    public string InterstitialAdID;
+    public string RewardedAdID;
 
     string bannerAdID = "";
     string interstitialAdID = "";
     string rewardedAdID = "";
 
-    public bool showBannerOnLoadingScreen;
-    public bool isProductionApp;
+    //public bool showBannerOnLoadingScreen;
+    
 
     private void Awake()
     {
@@ -45,17 +57,21 @@ public class AdManager : MonoBehaviour
         
         if (isProductionApp)
         {
-            bannerAdID = "ca-app-pub-3828162090040000/8858254020";
-            interstitialAdID = "ca-app-pub-3828162090040000/9942436687";
-            rewardedAdID = "ca-app-pub-3828162090040000/4690110008";
+            bannerAdID = BannerAdID;
+            interstitialAdID = InterstitialAdID;
+            rewardedAdID = RewardedAdID;
         }
         else {
-            bannerAdID = "ca-app-pub-3940256099942544/6300978111";
-            interstitialAdID = "ca-app-pub-3940256099942544/1033173712";
-            rewardedAdID = "ca-app-pub-3940256099942544/5224354917";
+            bannerAdID = testBannerAdID;
+            interstitialAdID = testInterstitialAdID;
+            rewardedAdID = testRewardedAdID;
         }
+
+        Debug.Log("BannerAdID: " + bannerAdID);
+        Debug.Log("InterstitialAdID: " + interstitialAdID);
+        Debug.Log("RewardedAdID: " + rewardedAdID);
         //MobileAds.SetiOSAppPauseOnBackground(true);
-        MobileAds.Initialize(appID);
+        MobileAds.Initialize(AppID);
         //ShowBannerAd();
         this.RequestInterstitialAd();
 
