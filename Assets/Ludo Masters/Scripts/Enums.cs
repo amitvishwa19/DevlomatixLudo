@@ -33,7 +33,7 @@ public enum AdLocation
 
 public enum MyGameType
 {
-    TwoPlayer, FourPlayer, Private
+    TwoPlayer, FourPlayer, ThreePlayers, Private,Offline
 };
 
 public enum MyGameMode

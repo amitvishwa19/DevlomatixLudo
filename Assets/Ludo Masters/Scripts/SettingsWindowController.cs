@@ -14,12 +14,15 @@ public class SettingsWindowController : MonoBehaviour
     public GameObject FriendsRequests;
     public GameObject PrivateRoomRequests;
     public Text appVersion;
+    GameObject ProductionAppToggle;
 
 
 
     // Use this for initialization
     void Start()
     {
+
+        #region Default Settings
         if (PlayerPrefs.GetInt(StaticStrings.SoundsKey, 0) == 1)
         {
             Sounds.GetComponent<Toggle>().isOn = false;
@@ -101,9 +104,38 @@ public class SettingsWindowController : MonoBehaviour
                     PlayerPrefs.SetInt(StaticStrings.PrivateRoomKey, value ? 0 : 1);
                 }
         );
+        #endregion
+
+
+        #region Production App Setting
+
+
+        Debug.Log("Production App Status : " + PlayerPrefs.GetInt("productionapp"));
+        ProductionAppToggle = GameObject.Find("ProductionToggle");
+
+        if (PlayerPrefs.GetInt("productionapp") == 1)
+        { ProductionAppToggle.GetComponent<Toggle>().isOn = true; }
+        else { ProductionAppToggle.GetComponent<Toggle>().isOn = false; }
+
+        
+        //ProductionAppToggle.GetComponent<Toggle>().isOn = true;
+        #endregion
 
         appVersion.text = Application.version;
     }
 
+    public void ProductionToggle() {
 
+        Debug.Log("ToggleStatus :" + ProductionAppToggle.GetComponent<Toggle>().isOn);
+        if (ProductionAppToggle.GetComponent<Toggle>().isOn == true)
+        {
+            PlayerPrefs.SetInt("productionapp", 1);
+            Settings.Instance.ProductionApp = true;
+        }
+        else {
+            PlayerPrefs.SetInt("productionapp", 0);
+            Settings.Instance.ProductionApp = false;
+        }
+    
+    }
 }

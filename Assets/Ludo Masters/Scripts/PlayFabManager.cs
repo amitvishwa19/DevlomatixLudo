@@ -59,7 +59,13 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
     void Awake()
     {
-        Debug.Log("Playfab awake");
+
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("Playfab awake");
+        }
+
+       
 
         if (!rememberPlayerPref) {
             PlayerPrefs.DeleteAll();
@@ -74,7 +80,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 #else
         PhotonNetwork.PhotonServerSettings.Protocol = ConnectionProtocol.Udp;
 #endif
-        Debug.Log("PORT: " + PhotonNetwork.PhotonServerSettings.ServerPort);
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("PORT: " + PhotonNetwork.PhotonServerSettings.ServerPort); }
 
         PlayFabSettings.TitleId = StaticStrings.PlayFabTitleID;
 
@@ -96,7 +103,14 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
     // Use this for initialization
     void Start()
     {
-        Debug.Log("Playfab start");
+        
+
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("Playfab start");
+        }
+
+
         PhotonNetwork.BackgroundTimeout = StaticStrings.photonDisconnectTimeoutLong; ;
         GameManager.Instance.playfabManager = this;
         fbManager = GameObject.Find("FacebookManager").GetComponent<FacebookManager>();
@@ -290,7 +304,9 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
         } else
             GameManager.Instance.requiredPlayers = 4;
 
-        Debug.Log ("Required Player    " + GameManager.Instance.requiredPlayers);
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Required Player    " + GameManager.Instance.requiredPlayers); }
+
         for (int i = 0; i < GameManager.Instance.requiredPlayers - 1; i++) {
             if (GameManager.Instance.opponentsIDs[i] == null) {
                 // StartCoroutine(AddBot(i));
@@ -405,7 +421,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
     public void getPlayerDataRequest()
     {
-        Debug.Log("Get player data request!!");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Get player data request!!"); }
         GetUserDataRequest getdatarequest = new GetUserDataRequest()
         {
             PlayFabId = GameManager.Instance.playfabManager.PlayFabId,
@@ -417,9 +434,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
             Dictionary<string, UserDataRecord> data = result.Data;
 
             GameManager.Instance.myPlayerData = new MyPlayerData(data, true);
-
-
-            Debug.Log("Get player data request finish!!");
+            
+            if (Settings.Instance.ShowDebugLog) { Debug.Log("Get player data request finish!!"); }
             StartCoroutine(loadSceneMenu());
         }, (error) =>
         {
@@ -806,10 +822,11 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
             PlayerPrefs.SetString("unique_identifier", customId);
         }
 
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("UNIQUE IDENTIFIER: " + customId);
+        }
 
-
-
-        Debug.Log("UNIQUE IDENTIFIER: " + customId);
 
         LoginWithCustomIDRequest request = new LoginWithCustomIDRequest()
         {
@@ -823,13 +840,22 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
         PlayFabClientAPI.LoginWithCustomID(request, (result) =>
         {
             PlayFabId = result.PlayFabId;
-            Debug.Log("Got PlayFabID: " + PlayFabId);
+
+            if (Settings.Instance.ShowDebugLog)
+            {
+                Debug.Log("Got PlayFabID: " + PlayFabId);
+            }
+
+            
 
             Dictionary<string, string> data = new Dictionary<string, string>();
 
             if (result.NewlyCreated)
             {
-                Debug.Log("(new account)");
+                
+                if (Settings.Instance.ShowDebugLog) { Debug.Log("(new account)"); }
+
+
                 setInitNewAccountData(false);
 
                 string name = result.PlayFabId;
@@ -845,7 +871,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
             else
             {
                 CheckIfFirstTitleLogin(PlayFabId, false);
-                Debug.Log("(existing account)");
+               
+                if (Settings.Instance.ShowDebugLog) { Debug.Log("(existing account)"); }
             }
 
 
@@ -880,7 +907,7 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
             PlayFabClientAPI.UpdateUserTitleDisplayName(displayNameRequest, (response) =>
             {
-                Debug.Log("Title Display name updated successfully");
+                if (Settings.Instance.ShowDebugLog) { Debug.Log("Title Display name updated successfully"); }
             }, (error) =>
             {
                 Debug.Log("Title Display name updated error: " + error.Error);
@@ -1021,7 +1048,7 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
     void OnPhotonAuthenticationSuccess(GetPhotonAuthenticationTokenResult result)
     {
         string photonToken = result.PhotonCustomAuthenticationToken;
-        Debug.Log(string.Format("Yay, logged in session token: {0}", photonToken));
+        if (Settings.Instance.ShowDebugLog) { Debug.Log(string.Format("Yay, logged in session token: {0}", photonToken)); }
         PhotonNetwork.AuthValues = new AuthenticationValues();
         PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Custom;
         PhotonNetwork.AuthValues.AddAuthParameter("username", this.PlayFabId);
@@ -1056,8 +1083,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
 
     public void OnConnected()
-    {
-        Debug.Log("Photon Chat connected!!!");
+    {     
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Photon Chat connected!!!"); }
         chatClient.Subscribe(new string[] { "invitationsChannel" });
     }
 
@@ -1100,7 +1127,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
     public void OnSubscribed(string[] channels, bool[] results)
     {
-        Debug.Log("Subscribed to CHAT - set online status!");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Subscribed to CHAT - set online status!"); }
         chatClient.SetOnlineStatus(ChatUserStatus.Online);
     }
 
@@ -1230,7 +1258,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
     public override void OnConnectedToMaster()
     {
         isInMaster = true;
-        Debug.Log("Connected to master");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Connected to master"); }
 
         PhotonNetwork.JoinLobby();
 
@@ -1238,7 +1267,8 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joined lobby");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Joined lobby"); }
         isInLobby = true;
     }
 

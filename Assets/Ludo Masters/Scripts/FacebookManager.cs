@@ -47,7 +47,16 @@ public class FacebookManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("FBManager start");
+        
+
+
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("FBManager start");
+        }
+
+
+
         GameManager.Instance.facebookManager = this;
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -60,7 +69,12 @@ public class FacebookManager : MonoBehaviour
     // Awake function from Unity's MonoBehavior
     void Awake()
     {
-        Debug.Log("FBManager awake");
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("FBManager awake");
+        }
+
+        
         GameManager.Instance.facebookManager = this;
         DontDestroyOnLoad(transform.gameObject);
         playFabManager = GameObject.Find("PlayFabManager").GetComponent<PlayFabManager>();
@@ -349,7 +363,12 @@ public class FacebookManager : MonoBehaviour
 
     private void initSession()
     {
-        Debug.Log("FbManager init session");
+        
+
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("FbManager init session");
+        }
 
         string logType = PlayerPrefs.GetString("LoggedType");
         if (logType.Equals("Facebook"))

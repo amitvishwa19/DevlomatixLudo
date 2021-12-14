@@ -99,7 +99,8 @@ public class FortuneWheelManager : MonoBehaviour
     {
 
 
-        Debug.Log("Fortune wheel awake");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Fortune wheel awake"); }
 
 
         PlayerPrefs.SetString(LAST_FREE_TURN_TIME_NAME, GameManager.Instance.myPlayerData.GetLastFortuneTime());
@@ -249,7 +250,8 @@ public class FortuneWheelManager : MonoBehaviour
     public void SetNextFreeTime()
     {
 
-        Debug.Log("Next free turn");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Next free turn"); }
 
         // Reset the remaining time values
         _timerRemainingHours = TimerMaxHours;
@@ -272,7 +274,8 @@ public class FortuneWheelManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(StaticStrings.NotificationsKey, 0) == 0)
         {
-            Debug.Log("Start notification");
+            
+            if (Settings.Instance.ShowDebugLog) { Debug.Log("Start notification"); }
             LocalNotification.SendNotification(1, miliSeconds, StaticStrings.notificationTitle, StaticStrings.notificationMessage, new Color32(0xff, 0x44, 0x44, 255), true, true, true, "app_icon");
         }
         else

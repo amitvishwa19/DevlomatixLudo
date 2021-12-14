@@ -127,7 +127,8 @@ public class MyPlayerData
 
             GameManager.Instance.nameMy = GetPlayerName();
         }
-        Debug.Log("MY DATA LOADED");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("MY DATA LOADED"); }
 
     }
 
@@ -139,10 +140,14 @@ public class MyPlayerData
         if (this.data != null)
             foreach (var item in data)
             {
-                Debug.Log("SAVE: " + item.Key);
+                
+                if (Settings.Instance.ShowDebugLog) { Debug.Log("SAVE: " + item.Key); }
+
                 if (this.data.ContainsKey(item.Key))
                 {
-                    Debug.Log("AA");
+                    
+                    if (Settings.Instance.ShowDebugLog) { Debug.Log("AA"); }
+
                     this.data[item.Key].Value = item.Value;
 
                 }
@@ -156,7 +161,7 @@ public class MyPlayerData
 
         PlayFabClientAPI.UpdateUserData(userDataRequest, (result1) =>
         {
-            Debug.Log("Data updated successfull ");
+            if (Settings.Instance.ShowDebugLog) { Debug.Log("Data updated successfull "); }
 
         }, (error1) =>
         {

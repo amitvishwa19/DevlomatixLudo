@@ -14,9 +14,14 @@ public class GameConfigrationController : MonoBehaviour
     public GameObject PlusButton;
     public GameObject[] Toggles;
     private int currentBidIndex = 0;
+    public GameObject OfflineGamePlayOptions;
+    public GameObject OfflineGamePlayButton;
+    public GameObject GamePlayButton;
 
     private MyGameMode[] modes = new MyGameMode[] { MyGameMode.Classic, MyGameMode.Quick, MyGameMode.Master };
     public GameObject privateRoomJoin;
+
+    public int TotalPlayers;
     // Use this for initialization
     void Start()
     {
@@ -52,14 +57,29 @@ public class GameConfigrationController : MonoBehaviour
 
         switch (GameManager.Instance.type)
         {
+            case MyGameType.Offline:
+                TitleText.GetComponent<Text>().text = "Play with Bots";
+                OfflineGamePlayOptions.SetActive(true);
+                OfflineGamePlayButton.SetActive(true);
+                GamePlayButton.SetActive(false);
+                break;
             case MyGameType.TwoPlayer:
-                TitleText.GetComponent<Text>().text = "Two Players";
+                TitleText.GetComponent<Text>().text = "Play Online";
+                OfflineGamePlayOptions.SetActive(false);
+                OfflineGamePlayButton.SetActive(false);
+                GamePlayButton.SetActive(true);
                 break;
             case MyGameType.FourPlayer:
-                TitleText.GetComponent<Text>().text = "Four Players";
+                TitleText.GetComponent<Text>().text = "Online Multiplayer";
+                OfflineGamePlayOptions.SetActive(false);
+                OfflineGamePlayButton.SetActive(false);
+                GamePlayButton.SetActive(true);
                 break;
             case MyGameType.Private:
-                TitleText.GetComponent<Text>().text = "Private Room";
+                TitleText.GetComponent<Text>().text = "Private Table";
+                OfflineGamePlayOptions.SetActive(false);
+                OfflineGamePlayButton.SetActive(false);
+                GamePlayButton.SetActive(true);
                 privateRoomJoin.SetActive(true);
                 break;
         }
@@ -91,8 +111,10 @@ public class GameConfigrationController : MonoBehaviour
     {
         if (GameManager.Instance.myPlayerData.GetCoins() >= GameManager.Instance.payoutCoins)
         {
+           
             if (GameManager.Instance.type != MyGameType.Private)
             {
+                setCreatedProvateRoom();
                 GameManager.Instance.facebookManager.startRandomGame();
             }
             else
@@ -100,11 +122,13 @@ public class GameConfigrationController : MonoBehaviour
                 if (GameManager.Instance.JoinedByID)
                 {
                     Debug.Log("Joined by id!");
+                    setCreatedProvateRoom();
                     GameManager.Instance.matchPlayerObject.GetComponent<SetMyData>().MatchPlayer();
                 }
                 else
                 {
                     Debug.Log("Joined and created");
+                    setCreatedProvateRoom();
                     GameManager.Instance.playfabManager.CreatePrivateRoom();
                     GameManager.Instance.matchPlayerObject.GetComponent<SetMyData>().MatchPlayer();
                 }
@@ -117,10 +141,23 @@ public class GameConfigrationController : MonoBehaviour
         }
     }
 
-    private void ChangeGameMode(bool isActive, MyGameMode mode)
+    public void StartOfflineGame() {
+        if (GameManager.Instance.myPlayerData.GetCoins() >= GameManager.Instance.payoutCoins) {
+            GameManager.Instance.offlineMode = true;
+            GameManager.Instance.roomOwner = true;
+            GameManager.Instance.payoutCoins = StaticStrings.bidValues[0];
+            GameManager.Instance.playfabManager.PlayofflineMode();
+        }
+        else
+        {
+            GameManager.Instance.dialog.SetActive(true);
+        }
+    }
+        private void ChangeGameMode(bool isActive, MyGameMode mode)
     {
         if (isActive)
         {
+            Debug.Log("Game mode changed, Mode :" + mode);
             GameManager.Instance.mode = mode;
         }
     }
@@ -147,7 +184,7 @@ public class GameConfigrationController : MonoBehaviour
 
     private void UpdateBid(bool changeBidInGM)
     {
-        bidText.GetComponent<Text>().text = StaticStrings.bidValuesStrings[currentBidIndex];
+        //bidText.GetComponent<Text>().text = StaticStrings.bidValuesStrings[currentBidIndex];
 
         if (changeBidInGM)
             GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
@@ -163,4 +200,16 @@ public class GameConfigrationController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
+    public void OfflineTwoPlayers() {
+        Debug.Log("Offline Two Players");
+        TotalPlayers = 2;
+    }
+
+    public void OfflineFourPlayers() {
+        Debug.Log("Offline Four Player");
+        TotalPlayers = 4;
+    }
+    
 }

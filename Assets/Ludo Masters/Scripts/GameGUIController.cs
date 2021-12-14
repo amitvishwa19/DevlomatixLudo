@@ -211,7 +211,8 @@ public class GameGUIController : PunBehaviour
 
         for (int i = 0; i < PlayersIDs.Count; i++)
         {
-            Debug.Log(playerObjects[i].id);
+            
+            if (Settings.Instance.ShowDebugLog) { Debug.Log(playerObjects[i].id); }
         }
 
         ActivePlayersInRoom = PlayersIDs.Count;
@@ -524,7 +525,8 @@ public class GameGUIController : PunBehaviour
 
     private IEnumerator waitForPlayersToStart()
     {
-        Debug.Log("Waiting for players " + GameManager.Instance.readyPlayersCount + " - " + requiredToStart);
+       
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Waiting for players " + GameManager.Instance.readyPlayersCount + " - " + requiredToStart); }
 
         yield return new WaitForSeconds(0.1f);
 
@@ -961,7 +963,9 @@ public class GameGUIController : PunBehaviour
 
     private void SetTurn()
     {
-        Debug.Log("SET TURN CALLED");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("SET TURN CALLED"); }
+
         for (int i = 0; i < playerObjects.Count; i++)
         {
             playerObjects[i].dice.GetComponent<GameDiceController>().EnableDiceShadow();

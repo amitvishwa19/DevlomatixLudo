@@ -5,6 +5,7 @@ using GoogleMobileAds.Api;
 using UnityEngine.EventSystems;
 using System;
 using AssemblyCSharp;
+using UnityEngine.Advertisements;
 
 public class AdManager : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class AdManager : MonoBehaviour
     private string testRewardedAdID = "ca-app-pub-3940256099942544/5224354917";
 
     public bool UnityAds;
+    public string UnityAndroidAppID;
+
+
+
     public bool AdMob;
     public bool isProductionApp;
 
@@ -54,8 +59,14 @@ public class AdManager : MonoBehaviour
 
     private void Start()
     {
+        //Unity Ads  Rewarded_Android
+        if (UnityAds) {
+            //Advertisement.Initialize("4502575");
         
-        if (isProductionApp)
+        }
+        //Advertisement.Initialize("4502575");
+
+        if (Settings.Instance.ProductionApp)
         {
             bannerAdID = BannerAdID;
             interstitialAdID = InterstitialAdID;
@@ -67,9 +78,16 @@ public class AdManager : MonoBehaviour
             rewardedAdID = testRewardedAdID;
         }
 
-        Debug.Log("BannerAdID: " + bannerAdID);
-        Debug.Log("InterstitialAdID: " + interstitialAdID);
-        Debug.Log("RewardedAdID: " + rewardedAdID);
+        
+        if (Settings.Instance.ShowDebugLog)
+        {
+            Debug.Log("BannerAdID: " + bannerAdID);
+            Debug.Log("InterstitialAdID: " + interstitialAdID);
+            Debug.Log("RewardedAdID: " + rewardedAdID);
+        }
+
+
+
         //MobileAds.SetiOSAppPauseOnBackground(true);
         MobileAds.Initialize(AppID);
         //ShowBannerAd();
@@ -90,6 +108,8 @@ public class AdManager : MonoBehaviour
     {
         return new AdRequest.Builder().Build(); 
     }
+
+    #region GoogleAdMob
 
     #region Banner Ads
     public void ShowBannerAd()
@@ -170,6 +190,39 @@ public class AdManager : MonoBehaviour
     }
 
     #endregion
-   
-   
+
+    #endregion
+
+    #region UnityAds
+
+    public void PlayAd() {
+        Debug.Log("Unity Video Ad Played");
+        if (Advertisement.IsReady("video"))
+        {
+            Debug.Log("Unity Ad is ready to play");
+            Advertisement.Show();
+        }
+        else {
+            Debug.Log("Unity Ad is not ready to play");
+        }
+    }
+
+    public void UnityBannerAd() {
+        if (Advertisement.IsReady("banner"))
+        {
+            Debug.Log("Unity BAnner Ad is ready to play");
+            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Show("banner");
+
+        }
+        else {
+
+            Debug.Log("Unity Banner Ad is not ready to play");
+
+        }
+
+
+    }
+
+    #endregion
 }

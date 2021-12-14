@@ -1,16 +1,4 @@
-/*
-http://www.cgsoso.com/forum-211-1.html
 
-CG搜搜 Unity3d 每日Unity3d插件免费更新 更有VIP资源！
-
-CGSOSO 主打游戏开发，影视设计等CG资源素材。
-
-插件如若商用，请务必官网购买！
-
-daily assets update for try.
-
-U should buy the asset from home store if u use it in your project!
-*/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +34,9 @@ public class GameDiceController : MonoBehaviour
 
     public void SetDiceValue()
     {
-        Debug.Log("Set dice value called");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Set dice value called"); }
+
         diceValueObject.GetComponent<Image>().sprite = diceValueSprites[steps - 1];
         diceValueObject.SetActive(true);
         diceAnim.SetActive(false);
@@ -140,7 +130,8 @@ public class GameDiceController : MonoBehaviour
         controller.nextShotPossible = false;
         controller.gUIController.PauseTimers();
 
-        Debug.Log("Roll Dice bot");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Roll Dice bot"); }
 
         // if (bb % 2 == 0) steps = 6;
         // else steps = 2;

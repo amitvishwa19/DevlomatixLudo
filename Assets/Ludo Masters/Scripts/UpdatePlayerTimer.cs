@@ -107,7 +107,7 @@ public class UpdatePlayerTimer : MonoBehaviour
             else
             {
                 GameManager.Instance.wasFault = true;
-                GameManager.Instance.cueController.setTurnOffline(true);
+                //GameManager.Instance.cueController.setTurnOffline(true);
             }
 
 

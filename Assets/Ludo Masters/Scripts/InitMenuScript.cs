@@ -100,10 +100,8 @@ public class InitMenuScript : MonoBehaviour
 
         rewardDialogText.GetComponent<Text>().text = "1 Video = " + StaticStrings.rewardForVideoAd + " Coins";
         //coinsText.GetComponent<Text>().text = GameManager.Instance.myPlayerData.GetCoins() + "";
-
-
-
-        Debug.Log("Load ad menu");
+        
+        if (Settings.Instance.ShowDebugLog) { Debug.Log("Load ad menu"); }
         //AdsManager.Instance.adsScript.ShowAd(AdLocation.GameStart);
 
         if (PlayerPrefs.GetInt("GamesPlayed", 1) % 8 == 0 && PlayerPrefs.GetInt("GameRated", 0) == 0)
@@ -137,12 +135,15 @@ public class InitMenuScript : MonoBehaviour
         switch (index)
         {
             case 0:
-                GameManager.Instance.type = MyGameType.TwoPlayer;
+                GameManager.Instance.type = MyGameType.Offline;
                 break;
             case 1:
-                GameManager.Instance.type = MyGameType.FourPlayer;
+                GameManager.Instance.type = MyGameType.TwoPlayer;
                 break;
             case 2:
+                GameManager.Instance.type = MyGameType.FourPlayer;
+                break;
+            case 3:
                 GameManager.Instance.type = MyGameType.Private;
                 break;
         }
@@ -152,6 +153,7 @@ public class InitMenuScript : MonoBehaviour
 
     public void SetNoOfPlayers(int index)
     {
+        Debug.Log("NUmber of players set : " + index);
         switch (index)
         {
             case 0:
@@ -163,6 +165,8 @@ public class InitMenuScript : MonoBehaviour
             
         }
     }
+
+   
 
     public void TakeScreenshot()
     {
@@ -381,5 +385,10 @@ public class InitMenuScript : MonoBehaviour
         GameManager.Instance.playfabManager.removeCoinsRequest(coins);
 
         //GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
+    }
+
+    public void AddCoins()
+    {
+        GameManager.Instance.playfabManager.addCoinsRequest(500);
     }
 }
