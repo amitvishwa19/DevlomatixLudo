@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AdController : MonoBehaviour
 {
-    public void ShowUnityVideoAd() {
-        AdManager.instance.UnityBannerAd();
-    }
+//    public void ShowUnityVideoAd() {
+//        AdManager.instance.UnityBannerAd();
+//    }
 }

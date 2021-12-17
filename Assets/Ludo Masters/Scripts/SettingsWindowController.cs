@@ -130,11 +130,11 @@ public class SettingsWindowController : MonoBehaviour
         if (ProductionAppToggle.GetComponent<Toggle>().isOn == true)
         {
             PlayerPrefs.SetInt("productionapp", 1);
-            Settings.Instance.ProductionApp = true;
+            //Settings.Instance.ProductionApp = true;
         }
         else {
             PlayerPrefs.SetInt("productionapp", 0);
-            Settings.Instance.ProductionApp = false;
+            //Settings.Instance.ProductionApp = false;
         }
     
     }

@@ -21,6 +21,8 @@ public class GameConfigrationController : MonoBehaviour
     private MyGameMode[] modes = new MyGameMode[] { MyGameMode.Classic, MyGameMode.Quick, MyGameMode.Master };
     public GameObject privateRoomJoin;
 
+    public GameObject ExitWIndow;
+
     public int TotalPlayers;
     // Use this for initialization
     void Start()
@@ -33,7 +35,15 @@ public class GameConfigrationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitWIndow.SetActive(true);
+        }
+    }
 
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 

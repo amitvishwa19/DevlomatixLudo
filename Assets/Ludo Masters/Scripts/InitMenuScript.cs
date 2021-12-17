@@ -39,7 +39,7 @@ public class InitMenuScript : MonoBehaviour
     // Use this for initialization
     public GameObject GameConfigurationScreen;
     public GameObject FourPlayerMenuButton;
-
+    public GameObject ExitWindow;
     void Start()
     {
 
@@ -112,7 +112,7 @@ public class InitMenuScript : MonoBehaviour
 
     }
 
-
+   
     public void QuitApp()
     {
         PlayerPrefs.SetInt("GameRated", 1);
@@ -177,6 +177,16 @@ public class InitMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("Back Button Click");
+            ExitWindow.SetActive(true);
+        }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public void showAdStore()
@@ -342,6 +352,7 @@ public class InitMenuScript : MonoBehaviour
     {
 #if UNITY_ANDROID || UNITY_IOS
         AdManager.instance.ShowRewardBaseVideo();
+        //AdManager.instance.ShowInterstitial();
 #endif
     }
 
@@ -370,7 +381,7 @@ public class InitMenuScript : MonoBehaviour
 
 
     public void ShowBannerAdd() {
-        AdManager.instance.ShowBannerAd();
+        //AdManager.instance.ShowBannerAd();
     
     }
 

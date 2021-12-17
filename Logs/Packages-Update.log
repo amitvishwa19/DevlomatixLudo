@@ -76,3 +76,13 @@ Update Mode: resetToDefaultDependencies
 The following packages were removed:
   com.unity.ads@3.7.1
   com.unity.purchasing@3.1.0
+
+=== Tue Dec 14 16:53:28 2021
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were removed:
+  com.unity.2d.sprite@1.0.0
+  com.unity.ads@3.7.1
+  com.unity.purchasing@3.1.0

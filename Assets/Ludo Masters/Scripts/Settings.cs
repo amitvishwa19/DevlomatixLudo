@@ -11,40 +11,52 @@ public class Settings : MonoBehaviour
     public bool ProductionApp;
 
     GameObject ProductionAppToggle;
+    GameObject ExitWindow;
 
     private void Awake()
     {
         if (Instance == null){ Instance = this; }
         else { Destroy(this);}
         DontDestroyOnLoad(this);
-
-        if (!PlayerPrefs.HasKey("productionapp"))
-        {
-            Debug.Log("Playerpref HasKey productionapp");
-            PlayerPrefs.SetInt("productionapp", 0);
-        }
     }
 
-    private void Start()
+    private void Update()
     {
-        if (PlayerPrefs.HasKey("productionapp")) {
-            if (PlayerPrefs.GetInt("productionapp") == 1)
-            { ProductionApp = true; }
-            else { ProductionApp = false; }
-        }
-        
-    }
-
-    private void OnEnable()
-    {
-        Debug.Log("DevlomatixSetting Enable Method" + SceneManager.GetActiveScene().name);
-
-        if (SceneManager.GetActiveScene().name == "MenuScene")
+        if (Input.GetKey(KeyCode.Escape))
         {
-            ProductionAppToggle = GameObject.Find("ProductionToggle");
-            Debug.Log(ProductionAppToggle.name);
-
+            Debug.Log("Back Button Click");
+            //ExitWindow.SetActive(true);
+            ExitWindow = GameObject.Find("ExitWindow");
+            ExitWindow.SetActive(true);
         }
-        //Debug.Log(SceneManager.GetActiveScene().name);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
+    //private void Start()
+    //{
+    //    if (PlayerPrefs.HasKey("productionapp")) {
+    //        if (PlayerPrefs.GetInt("productionapp") == 1)
+    //        { ProductionApp = true; }
+    //        else { ProductionApp = false; }
+    //    }
+
+    //}
+
+    //private void OnEnable()
+    //{
+    //    Debug.Log("DevlomatixSetting Enable Method" + SceneManager.GetActiveScene().name);
+
+    //    if (SceneManager.GetActiveScene().name == "MenuScene")
+    //    {
+    //        ProductionAppToggle = GameObject.Find("ProductionToggle");
+    //        Debug.Log(ProductionAppToggle.name);
+
+    //    }
+    //    //Debug.Log(SceneManager.GetActiveScene().name);
+    //}
 }

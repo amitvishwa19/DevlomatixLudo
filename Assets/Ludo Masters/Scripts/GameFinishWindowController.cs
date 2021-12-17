@@ -36,7 +36,7 @@ public class GameFinishWindowController : MonoBehaviour
         prizeText[0].GetComponent<Text>().text = firstPlacePrize.ToString();
         prizeText[1].GetComponent<Text>().text = secondPlacePrize.ToString();
 
-        AdManager.instance.ShowInterstitialAd();
+        //AdManager.instance.ShowInterstitialAd();
         Window.SetActive(true);
         for (int i = 0; i < playersFinished.Count; i++)
         {
