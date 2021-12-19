@@ -419,6 +419,49 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
         GameManager.Instance.myPlayerData.UpdateUserData(data);
     }
 
+    public void addImmunityRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.ImmunityKey, "" + (GameManager.Instance.myPlayerData.GetImmunity() + count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+    public void removeImmunityRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.ImmunityKey, "" + (GameManager.Instance.myPlayerData.GetImmunity() - count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+    public void addSupersixRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.SuperSixKey, "" + (GameManager.Instance.myPlayerData.GetSuperSix() + count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+    public void removeSupersixRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.SuperSixKey, "" + (GameManager.Instance.myPlayerData.GetSuperSix() - count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+    public void addRupyRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.RubyKey, "" + (GameManager.Instance.myPlayerData.GetRuby() + count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+    public void removeRubyRequest(int count)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add(MyPlayerData.RubyKey, "" + (GameManager.Instance.myPlayerData.GetRuby() - count));
+        GameManager.Instance.myPlayerData.UpdateUserData(data);
+    }
+
+
     public void getPlayerDataRequest()
     {
         
@@ -896,7 +939,16 @@ public class PlayFabManager : Photon.PunBehaviour, IChatClientListener
 
 
             data.Add("LoggedType", "Guest");
+            //data.Add("Immunity", PlayerPrefs.GetInt("immunity").ToString());
+            //data.Add("SuperSix", PlayerPrefs.GetInt("supersix").ToString());
+            //data.Add("Ruby", PlayerPrefs.GetInt("ruby").ToString());
 
+            if (result.NewlyCreated) {
+                data.Add("Immunity", "0");
+                data.Add("SuperSix", "0");
+                data.Add("Ruby", "0");
+            }
+            
 
 
             UpdateUserTitleDisplayNameRequest displayNameRequest = new UpdateUserTitleDisplayNameRequest()

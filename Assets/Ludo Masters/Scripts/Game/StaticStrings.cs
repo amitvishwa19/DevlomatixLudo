@@ -17,9 +17,9 @@ namespace AssemblyCSharp
         public static float WaitTimeUntilStartWithBots = 5.0f; // Time in seconds. If after that time new player doesnt join room game will start with bots
 
         // Services configration IDS
-        public static string PlayFabTitleID = "50E63";
-        public static string PhotonAppID = "6d251f64-8215-4371-a87e-c6705df0a95e";
-        public static string PhotonChatID = "88a06f3b-10e5-41db-8d27-770dfb8cf578";
+        public static string PlayFabTitleID = "24C7E";
+        public static string PhotonAppID = "26edda80-0ac9-4f12-b3f8-461eb33cff2e";
+        public static string PhotonChatID = "eb945f8c-d3a2-4b01-ba62-c97980759816";
 
         // Admob Ads IDS
         public static string adMobAndroidID = "ca-app-pub-4150875028712336/345325345";

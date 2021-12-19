@@ -10,14 +10,13 @@ public class IAPController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
+        if (instance == null) { instance = this; }
+        else { Destroy(this);}
+
+        if (!PlayerPrefs.HasKey("showbannerad")) {
+            PlayerPrefs.SetInt("showbannerad", 1);
         }
-        else
-        {
-            Destroy(this);
-        }
+
     }
 
     public void BuyCoins(int coins) {
@@ -25,4 +24,9 @@ public class IAPController : MonoBehaviour
         Debug.Log(coins + " coins purchasedzl");
     }
 
+
+    public void RemoveAds() {
+        PlayerPrefs.SetInt("showbannerad", 0);
+        AdManager.instance.HideBanerAd();
+    }
 }

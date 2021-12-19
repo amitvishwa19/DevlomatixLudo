@@ -307,6 +307,7 @@ public class AdManager : MonoBehaviour
         this.RequestRewardBaseVideo();
 
         this.ShowBannerAd();
+
         this.RequestInterstitialAd();
     }
 
@@ -316,8 +317,12 @@ public class AdManager : MonoBehaviour
 
     #region Banner Ads
     public void ShowBannerAd() {
-        this.bannerAd = new BannerView(this.BannerAdID, AdSize.Banner, AdPosition.Bottom);
-        this.bannerAd.LoadAd(this.CreateRequest());
+        if (PlayerPrefs.GetInt("showbannerad") == 1)
+        {
+            this.bannerAd = new BannerView(this.BannerAdID, AdSize.Banner, AdPosition.Bottom);
+            this.bannerAd.LoadAd(this.CreateRequest());
+        }
+            
     }
 
     public void HideBanerAd() {

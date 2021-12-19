@@ -1,16 +1,3 @@
-/*
-http://www.cgsoso.com/forum-211-1.html
-
-CG搜搜 Unity3d 每日Unity3d插件免费更新 更有VIP资源！
-
-CGSOSO 主打游戏开发，影视设计等CG资源素材。
-
-插件如若商用，请务必官网购买！
-
-daily assets update for try.
-
-U should buy the asset from home store if u use it in your project!
-*/
 
 using System.Collections.Generic;
 using PlayFab;
@@ -33,6 +20,9 @@ public class MyPlayerData
     public static string EmojiKey = "Emoji";
     public static string AvatarIndexKey = "AvatarIndex";
     public static string FortuneWheelLastFreeKey = "FortuneWheelLastFreeTime";
+    public static string RubyKey = "Ruby";
+    public static string ImmunityKey = "Immunity";
+    public static string SuperSixKey = "SuperSix";
 
     public Dictionary<string, UserDataRecord> data;
 
@@ -42,6 +32,8 @@ public class MyPlayerData
             return int.Parse(this.data[CoinsKey].Value);
         else return 0;
     }
+
+    
 
     public int GetTotalEarnings()
     {
@@ -106,6 +98,26 @@ public class MyPlayerData
         }
     }
 
+    public int GetImmunity()
+    {
+        if (this.data != null && this.data.ContainsKey(ImmunityKey))
+            return int.Parse(this.data[ImmunityKey].Value);
+        else return 0;
+    }
+
+    public int GetSuperSix()
+    {
+        if (this.data != null && this.data.ContainsKey(SuperSixKey))
+            return int.Parse(this.data[SuperSixKey].Value);
+        else return 0;
+    }
+
+    public int GetRuby()
+    {
+        if (this.data != null && this.data.ContainsKey(RubyKey))
+            return int.Parse(this.data[RubyKey].Value);
+        else return 0;
+    }
 
 
     public MyPlayerData() { }
@@ -193,6 +205,12 @@ public class MyPlayerData
 
         data.Add(TitleFirstLoginKey, "1");
         data.Add(FortuneWheelLastFreeKey, DateTime.Now.Ticks.ToString());
+
+        //data.Add(RubyKey, "0");
+        //data.Add(ImmunityKey, "0");
+        //data.Add(SuperSixKey, "0");
+
+
         return data;
     }
 

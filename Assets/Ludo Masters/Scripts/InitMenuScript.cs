@@ -43,7 +43,10 @@ public class InitMenuScript : MonoBehaviour
     void Start()
     {
 
-
+        Debug.Log("Total Coins : " + GameManager.Instance.myPlayerData.GetCoins());
+        Debug.Log("Total Immunity : " + GameManager.Instance.myPlayerData.GetImmunity());
+        Debug.Log("Total SuperSix : " + GameManager.Instance.myPlayerData.GetSuperSix());
+        Debug.Log("Total Ruby : " + GameManager.Instance.myPlayerData.GetRuby());
 
 
         if (PlayerPrefs.GetInt(StaticStrings.SoundsKey, 0) == 0)
@@ -112,6 +115,15 @@ public class InitMenuScript : MonoBehaviour
 
     }
 
+
+    public void GetPlayerData() {
+        GameManager.Instance.playfabManager.getPlayerDataRequest();
+        Debug.Log("Total Coins : " + GameManager.Instance.myPlayerData.GetCoins());
+        Debug.Log("Total Immunity : " + GameManager.Instance.myPlayerData.GetImmunity());
+        Debug.Log("Total SuperSix : " + GameManager.Instance.myPlayerData.GetSuperSix());
+        Debug.Log("Total Ruby : " + GameManager.Instance.myPlayerData.GetRuby());
+
+    }
    
     public void QuitApp()
     {
@@ -397,6 +409,15 @@ public class InitMenuScript : MonoBehaviour
 
         //GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
     }
+
+    public void AddImmunity(int count)
+    {
+        GameManager.Instance.playfabManager.addImmunityRequest(count);
+
+        //GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
+    }
+
+
 
     public void AddCoins()
     {
