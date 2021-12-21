@@ -96,12 +96,26 @@ public class GameGUIController : PunBehaviour
 
     private int requiredToStart = 0;
 
-
+    //Game PowerPlay
+    [SerializeField] private int superSix;
+    public Text superSixCount;
+    [SerializeField] private int immunity;
+    public Text immunityCount;
 
     // Use this for initialization
     void Start()
     {
         requiredToStart = GameManager.Instance.requiredPlayers;
+
+        //game powers
+        superSix = GameManager.Instance.myPlayerData.GetSuperSix();
+        superSixCount.text = superSix.ToString();
+
+        immunity = GameManager.Instance.myPlayerData.GetImmunity();
+        immunityCount.text = immunity.ToString();
+
+
+
 
         if (GameManager.Instance.type == MyGameType.Private)
         {

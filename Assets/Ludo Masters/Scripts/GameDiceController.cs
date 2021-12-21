@@ -23,7 +23,9 @@ public class GameDiceController : MonoBehaviour
 
     public GameObject notInteractable;
 
-    private int steps = 0;
+    [SerializeField] private int steps = 0;
+
+    [SerializeField] private bool superSix;
     void Start()
     {
         button = GetComponent<Button>();
@@ -101,6 +103,8 @@ public class GameDiceController : MonoBehaviour
     }
     int aa = 0;
     int bb = 0;
+
+
     public void RollDice()
     {
         if (isMyDice)
@@ -114,7 +118,23 @@ public class GameDiceController : MonoBehaviour
             // if (aa % 2 == 0) steps = 6;
             // else steps = 2;
             // aa++;
-            steps = Random.Range(1, 7);
+
+            //if (superSix){ 
+            //    steps = 6;
+            //    superSix = false;
+            //    GameManager.Instance.playfabManager.removeSupersixRequest(1);
+            //} else {
+            //    steps = Random.Range(1, 7); 
+            //}
+            if (GamePowerPlay.Instance.superDice)
+            {
+                steps = GamePowerPlay.Instance.superDiceValue;
+                GamePowerPlay.Instance.superDice = false;
+            }
+            else {
+                steps = Random.Range(1, 7);
+            }
+
 
             RollDiceStart(steps);
             string data = steps + ";" + controller.gUIController.GetCurrentPlayerIndex();

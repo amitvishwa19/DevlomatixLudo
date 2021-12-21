@@ -416,6 +416,21 @@ public class InitMenuScript : MonoBehaviour
 
         //GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
     }
+    public void RemoveImmunity(int count)
+    {
+        GameManager.Instance.playfabManager.removeImmunityRequest(count);
+
+        //GameManager.Instance.payoutCoins = StaticStrings.bidValues[currentBidIndex];
+    }
+
+    public void SuperSix(int count)
+    {
+        GameManager.Instance.playfabManager.addSupersixRequest(count);
+    }
+    public void RemoveSuperSix(int count)
+    {
+        GameManager.Instance.playfabManager.removeSupersixRequest(count);
+    }
 
 
 
