@@ -438,9 +438,9 @@ public class LudoPawnController : MonoBehaviour
                                     GameManager.Instance.playerObjects[playerIndex].homeLockObjects.SetActive(false);
                                     // Move killed pawn to start position and remove from list
                                     pathController.pawns[i].GetComponent<LudoPawnController>().GoToInitPosition(false);
-
-
                                     pathController.RemovePawn(pathController.pawns[i]);
+
+                                    if (!myTurn) { Debug.Log("I am killed by opponent"); }
                                 }
                             }
                             else
