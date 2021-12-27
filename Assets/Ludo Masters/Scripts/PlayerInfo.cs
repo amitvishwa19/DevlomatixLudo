@@ -14,6 +14,8 @@ public class PlayerInfo : MonoBehaviour
 
     public Sprite avatarSprite;
 
+    public GameObject SuperDice;
+    public GameObject Immunity;
     public GameObject TotalEarningsValue;
     public GameObject CurrentMoneyValue;
     public GameObject GamesWonValue;
@@ -107,6 +109,11 @@ public class PlayerInfo : MonoBehaviour
         }
         TwoPlayerWinsValue.GetComponent<Text>().text = data.GetTwoPlayerWins().ToString();
         FourPlayerWinsValue.GetComponent<Text>().text = data.GetFourPlayerWins().ToString();
+
+        SuperDice.GetComponent<Text>().text = data.GetSuperSix().ToString();
+        Immunity.GetComponent<Text>().text = data.GetImmunity().ToString();
+
+        
 
     }
 }

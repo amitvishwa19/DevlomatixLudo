@@ -20,6 +20,8 @@ public class GamePowerPlay : MonoBehaviour
     public GameObject superDiceLock;
 
     public int steps;
+
+    public Animator SuperSixGlow;
     private void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -36,11 +38,26 @@ public class GamePowerPlay : MonoBehaviour
         }
 
         superDiceCount = GameManager.Instance.myPlayerData.GetSuperSix();
-        titleCountText.text = superDiceCount.ToString();
+
+        //if (superDiceCount <= 0)
+        //{
+        //    superDiceLock.SetActive(true);
+        //}
+        //else { superDiceLock.SetActive(false); }
+
+
+        //titleCountText.text = superDiceCount.ToString();
     }
 
+    private void OnEnable()
+    {
+        superDiceCount = GameManager.Instance.myPlayerData.GetSuperSix();
+        Debug.Log(superDiceCount);
+        SuperDice();    }
+
     public void SuperDice() {
-        superDiceWindow.SetActive(true);
+        
+        //superDiceWindow.SetActive(true);
         if (superDiceCount <= 0)
         {
             superDiceLock.SetActive(true);
@@ -51,11 +68,13 @@ public class GamePowerPlay : MonoBehaviour
     }
 
     public void SuperDiceValue(int value) {
+        Debug.Log("Super dice number selected " + value);
         superDice = true;
         superDiceValue = value;
         GameManager.Instance.playfabManager.removeSupersixRequest(1);
         superDiceCount = GameManager.Instance.myPlayerData.GetSuperSix();
-        titleCountText.text = superDiceCount.ToString();
+        //titleCountText.text = superDiceCount.ToString();
         iconCount.text = superDiceCount.ToString();
+        //superDiceWindow.SetActive(false);
     }
 }

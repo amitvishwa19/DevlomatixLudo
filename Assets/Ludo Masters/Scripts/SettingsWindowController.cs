@@ -110,12 +110,12 @@ public class SettingsWindowController : MonoBehaviour
         #region Production App Setting
 
 
-        Debug.Log("Production App Status : " + PlayerPrefs.GetInt("productionapp"));
-        ProductionAppToggle = GameObject.Find("ProductionToggle");
+        //Debug.Log("Production App Status : " + PlayerPrefs.GetInt("productionapp"));
+        //ProductionAppToggle = GameObject.Find("ProductionToggle");
 
-        if (PlayerPrefs.GetInt("productionapp") == 1)
-        { ProductionAppToggle.GetComponent<Toggle>().isOn = true; }
-        else { ProductionAppToggle.GetComponent<Toggle>().isOn = false; }
+        //if (PlayerPrefs.GetInt("productionapp") == 1)
+        //{ ProductionAppToggle.GetComponent<Toggle>().isOn = true; }
+        //else { ProductionAppToggle.GetComponent<Toggle>().isOn = false; }
 
         
         //ProductionAppToggle.GetComponent<Toggle>().isOn = true;

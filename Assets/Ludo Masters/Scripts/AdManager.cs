@@ -273,11 +273,11 @@ public class AdManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        if (!PlayerPrefs.HasKey("productionapp"))
-        {
-            Debug.Log("Playerpref HasKey productionapp");
-            PlayerPrefs.SetInt("productionapp", 0);
-        }
+        //if (!PlayerPrefs.HasKey("productionapp"))
+        //{
+        //    Debug.Log("Playerpref HasKey productionapp");
+        //    PlayerPrefs.SetInt("productionapp", 0);
+        //}
 
     }
 
@@ -285,7 +285,7 @@ public class AdManager : MonoBehaviour
     private void Start()
     {
 
-        if (PlayerPrefs.GetInt("productionapp") == 1)
+        if (ProductionApp)
         {
             BannerAdID = Admob_Banner_id;
             InterstitialAdID = Admob_Interstitial_id;
@@ -317,7 +317,7 @@ public class AdManager : MonoBehaviour
 
     #region Banner Ads
     public void ShowBannerAd() {
-        if (PlayerPrefs.GetInt("showbannerad") == 1)
+        if (PlayerPrefs.GetInt("showad") == 1)
         {
             this.bannerAd = new BannerView(this.BannerAdID, AdSize.Banner, AdPosition.Bottom);
             this.bannerAd.LoadAd(this.CreateRequest());

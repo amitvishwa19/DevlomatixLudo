@@ -178,7 +178,7 @@ public class GameGUIController : PunBehaviour
 
         GameManager.Instance.myPlayerData.UpdateUserData(data);
 
-
+        //Here will come the api request
 
         currentPlayerIndex = 0;
         emojiSprites = GameObject.Find("StaticGameVariablesContainer").GetComponent<StaticGameVariablesController>().emoji;

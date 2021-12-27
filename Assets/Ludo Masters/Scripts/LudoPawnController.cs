@@ -43,6 +43,10 @@ public class LudoPawnController : MonoBehaviour
 
 
     private int currentAudioSource = 0;
+
+    //Custom Player Immunity
+    [SerializeField] private bool immunity;
+    [SerializeField] private int immunityCount;
     void Start()
     {
 
@@ -55,6 +59,11 @@ public class LudoPawnController : MonoBehaviour
         initPosition = rect.anchoredPosition;
 
         GetComponent<Button>().interactable = false;
+
+        if (GameManager.Instance.myPlayerData.GetImmunity() > 0) {
+            immunity = true;
+            immunityCount = GameManager.Instance.myPlayerData.GetImmunity();
+        }
 
         if (GameManager.Instance.mode == MyGameMode.Master)
         {
@@ -436,6 +445,7 @@ public class LudoPawnController : MonoBehaviour
                                     ludoController.nextShotPossible = true;
                                     GameManager.Instance.playerObjects[playerIndex].canEnterHome = true;
                                     GameManager.Instance.playerObjects[playerIndex].homeLockObjects.SetActive(false);
+
                                     // Move killed pawn to start position and remove from list
                                     pathController.pawns[i].GetComponent<LudoPawnController>().GoToInitPosition(false);
                                     pathController.RemovePawn(pathController.pawns[i]);
