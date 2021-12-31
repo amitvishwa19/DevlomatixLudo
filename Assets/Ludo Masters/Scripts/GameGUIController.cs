@@ -129,41 +129,41 @@ public class GameGUIController : PunBehaviour
 
         int rotation = UnityEngine.Random.Range(0, 4);
 
-        Color[] colors = null;
+        //Color[] colors = null;
 
-        if (rotation == 0)
-        {
-            colors = new Color[] { colorYellow, colorGreen, colorRed, colorBlue };
-        }
-        else if (rotation == 1)
-        {
-            colors = new Color[] { colorBlue, colorYellow, colorGreen, colorRed };
-            ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -90.0f);
-        }
-        else if (rotation == 2)
-        {
-            colors = new Color[] { colorRed, colorBlue, colorYellow, colorGreen };
-            ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -180.0f);
-        }
-        else
-        {
-            colors = new Color[] { colorGreen, colorRed, colorBlue, colorYellow };
-            ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -270.0f);
-        }
+        //if (rotation == 0)
+        //{
+        //    colors = new Color[] { colorYellow, colorGreen, colorRed, colorBlue };
+        //}
+        //else if (rotation == 1)
+        //{
+        //    colors = new Color[] { colorBlue, colorYellow, colorGreen, colorRed };
+        //    ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -90.0f);
+        //}
+        //else if (rotation == 2)
+        //{
+        //    colors = new Color[] { colorRed, colorBlue, colorYellow, colorGreen };
+        //    ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -180.0f);
+        //}
+        //else
+        //{
+        //    colors = new Color[] { colorGreen, colorRed, colorBlue, colorYellow };
+        //    ludoBoard.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -270.0f);
+        //}
 
-        for (int i = 0; i < diceBackgrounds.Length; i++)
-        {
-            diceBackgrounds[i].GetComponent<Image>().color = colors[i];
-        }
+        //for (int i = 0; i < diceBackgrounds.Length; i++)
+        //{
+        //    diceBackgrounds[i].GetComponent<Image>().color = colors[i];
+        //}
 
-        for (int i = 0; i < playersPawnsColors.Length; i++)
-        {
-            for (int j = 0; j < playersPawnsColors[i].objectsArray.Length; j++)
-            {
-                playersPawnsColors[i].objectsArray[j].GetComponent<Image>().color = colors[i];
-                playersPawnsMultiple[i].objectsArray[j].GetComponent<Image>().color = colors[i];
-            }
-        }
+        //for (int i = 0; i < playersPawnsColors.Length; i++)
+        //{
+        //    for (int j = 0; j < playersPawnsColors[i].objectsArray.Length; j++)
+        //    {
+        //        playersPawnsColors[i].objectsArray[j].GetComponent<Image>().color = colors[i];
+        //        playersPawnsMultiple[i].objectsArray[j].GetComponent<Image>().color = colors[i];
+        //    }
+        //}
 
 
         // END LUDO
@@ -539,9 +539,6 @@ public class GameGUIController : PunBehaviour
 
     private IEnumerator waitForPlayersToStart()
     {
-       
-        if (Settings.Instance.ShowDebugLog) { Debug.Log("Waiting for players " + GameManager.Instance.readyPlayersCount + " - " + requiredToStart); }
-
         yield return new WaitForSeconds(0.1f);
 
 
